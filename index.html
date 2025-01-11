@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    
+    <section class="main bg-dark-green">
+        <div class="header">
+
+            <!-- logo -->
+            <div class="logo">
+                <img src="./image/logo.svg">
+                <p class="logo-text">
+                    상용저궤도 위성기반 통신체계
+                    <span>위성단말 운용자 콘솔</span>
+                </p>
+            </div>
+
+            <!-- nav -->
+            <ul class="nav">
+                <li class="nav_items active">
+                    <a href="#">
+                        <img src="./image/home.svg">
+                        <p class="nav_text">
+                            홈
+                        </p>
+                    </a>
+                </li>
+                <li class="nav_items">
+                    <a href="#">
+                        <img src="./image/antena.svg">
+                        <p class="nav_text">
+                            안테나
+                        </p>
+                    </a>
+                </li>
+                <li class="nav_items">
+                    <a href="#">
+                        <img src="./image/gnss.svg">
+                        <p class="nav_text">
+                            GNSS
+                        </p>
+                    </a>
+                </li>
+                <li class="nav_items">
+                    <a href="#">
+                        <img src="./image/network.svg">
+                        <p class="nav_text">
+                            네트워크
+                        </p>
+                    </a>
+                </li>
+                <li class="nav_items">
+                    <a href="#">
+                        <img src="./image/setting.svg">
+                        <p class="nav_text">
+                            시스템
+                        </p>
+                    </a>
+                </li>
+                <li class="nav_items">
+                    <a href="#">
+                        <img src="./image/info.svg">
+                        <p class="nav_text">
+                            운영정보
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- 갱신주기 -->
+            <div class="week">
+                <div class="dropdown">
+                    <button class="dropdown-button">
+                        <span>갱신주기</span>
+                        <div class="button-right">
+                            <span class="selected-text">0</span>
+                            <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="dropdown-content">
+                        <button class="dropdown-item">0</button>
+                        <button class="dropdown-item">1</button>
+                        <button class="dropdown-item">2</button>
+                        <button class="dropdown-item">3</button>
+                        <button class="dropdown-item">4</button>
+                        <button class="dropdown-item">5</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 로그아웃 -->
+            <div class="logout">
+                <button type="button" class="btn btn-outline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 17L21 12L16 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 12H9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>로그아웃</p>
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+
+<script src="./js/index.js"></script>
+</body>
+
+</html>
