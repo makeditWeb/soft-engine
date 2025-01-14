@@ -12,11 +12,6 @@ $colors: (
 );
 
 
-// Base font family
-* {
-    font-family: 'Pretendard', sans-serif;
-}
-
 // Colors
 @each $name, $color in $colors {
     .text-#{$name} {
@@ -115,13 +110,83 @@ $font-sizes: (
 }
 
 
+// fonts
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 100;
+    src: url('../fonts/Pretendard-Thin.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 200;
+    src: url('../fonts/Pretendard-ExtraLight.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    src: url('../fonts/Pretendard-Light.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    src: url('/fonts/Pretendard-Regular.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    src: url('../fonts/Pretendard-Medium.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    src: url('../fonts/Pretendard-SemiBold.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    src: url('../fonts/Pretendard-Bold.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    src: url('../fonts/Pretendard-ExtraBold.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 900;
+    src: url('../fonts/Pretendard-Black.woff2');
+}
+
+
+// Base font family
+* {
+    font-family: 'Pretendard', sans-serif;
+}
 
 
 // main
-
-.main{
-    height: 100vh;
+html {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #215968;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
 .header{
     display: flex;
     align-items: center;
@@ -129,11 +194,88 @@ $font-sizes: (
     padding: 26px 60px;
     box-sizing: border-box;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.30);
-
+    height: 128px;
+    box-sizing: border-box;
     .logo{
         display: flex;
         align-items: center;
         gap: 20px;
+
+        img{
+            width: 110px;
+            height: auto;
+        }
+
+        .logo-text{
+            color: #75C1D5;
+            font-size: 1.3rem;
+            font-weight: 500;
+            font-family: 'Pretendard';
+
+            span{
+                color: #4E98AC;
+                font-size: 1.2rem;
+                font-weight: 500;
+                display: block;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+
+        .nav_items{
+            
+            a{
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                font-family: 'Pretendard';
+                svg{
+                    fill: #4E98AC;
+                    background-color: #063E4D;
+                    border-radius: 50%;
+                    width: 3vw;
+                    height: 3vw;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    path{
+                        fill: #4E98AC;
+                        stroke: #4E98AC;
+                    }
+
+                }
+                .nav_text{
+                    color: #FFF;
+                    font-size: 1.1rem;
+                    font-weight: 400;
+                }
+            }
+
+            &.active{
+                svg{
+                    fill: #fff;
+                    background-color: transparent;
+                    border-radius: 50%;
+                    width: 3vw;
+                    height: 3vw;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    path{
+                        fill: #fff;
+                        stroke: #fff;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -146,18 +288,32 @@ $font-sizes: (
         width: 100%;
         background-color: rgba(33, 89, 104, 0.2);
         color: white;
-        padding: 12px 24px;
         border: none;
         border-radius: 8px;
         cursor: pointer;
+        padding: 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 18px;
+        font-size:1.125rem;
+
+        span {
+            word-break: keep-all;
+        }
         .button-right {
             display: flex;
             align-items: center;
             gap: 8px;
+            width: 144px;
+            justify-content: space-between;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05), 1px 1px 2px 0px rgba(255, 255, 255, 0.50) inset, -1px -1px 2px 0px rgba(0, 0, 0, 0.10) inset;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 0, 0, 0.20);
+            background: #267A86;
+            height: 45px;
+            padding: 16px;
+            box-sizing: border-box;
+            margin-left: 12px;
             .chevron {
                 width: 20px;
                 height: 20px;
@@ -173,11 +329,12 @@ $font-sizes: (
     .dropdown-content {
         display: none;
         position: absolute;
-        width: 100%;
+        width: 144px;
         margin-top: 8px;
-        background-color: rgba(33, 89, 104, 0.2);
+        background-color: #267A86;
         border-radius: 8px;
         overflow: hidden;
+        right: 0;
 
         &.show{
             display: block;
@@ -195,7 +352,7 @@ $font-sizes: (
             background: none;
             width: 100%;
             text-align: left;
-            font-size: 16px;
+            font-size: 1rem;
 
             &:hover{
                 background-color: rgba(33, 89, 104, 0.4);
@@ -203,5 +360,438 @@ $font-sizes: (
         }
         
     }
+
+    .logout{
+        button{
+            border-radius: 12px;
+            border: 1px solid #FFF;
+            background-color: #215968;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+            color: #FFF;
+            gap: 10px;
+            font-size: 1.25rem
+            svg{
+                width: 18px;
+            }
+
+            .p{
+                width: 1.25rem;
+            }
+        }
+
+    }
 }
 
+.login-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    
+    &.show {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-popup-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        
+        &:hover {
+            color: #333;
+        }
+    }
+
+    .login-popup-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        
+        h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #000;
+            font-weight: 700;
+            font-family: 'Pretendard';
+        }
+
+
+    }
+
+    .login-popup-body {
+        .input-group {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            label {
+                font-family: 'Pretendard';
+                display: block;
+                flex: 0 0 20%;
+                color: #000;
+                font-size: 1.125rem;
+                font-weight: 500;
+            }
+
+            input {
+                width: 80%;
+                padding: 10px 20px;
+                border: 1px solid #ddd;
+                border-radius: 12px;
+                box-sizing: border-box;
+                height: 55px;
+                background: #F3F3F3;
+                font-size: 1rem;
+                
+                &:focus {
+                    outline: none;
+                    border-color: #4a90e2;
+                }
+            }
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 10px 16px;
+            box-sizing: border-box;
+            background-color: #215968;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05), 1px 1px 2px 0px rgba(255, 255, 255, 0.50) inset, -1px -1px 2px 0px rgba(0, 0, 0, 0.10) inset;
+            &:hover {
+                background-color:  #063E4D;
+            }
+        }
+    }
+}
+
+.bottom__date{
+    position: absolute;
+    bottom: -20px;
+    right: 34px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #fff;
+    font-family: Pretendard;
+}
+
+.content{
+    min-height: calc(100vh - 128px);
+    padding: 15px 40px 60px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 24px;
+    position: relative;
+    .content__left{
+        padding: 1.875rem 1rem;
+        box-sizing: border-box;
+        width: 32%;
+        background: #063947;
+        height: 100%;
+        border-radius: 12px;
+        .antenna__header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 5px;
+
+            .arrow-icon{
+                align-self: center;
+            }
+
+            .antnenna__list{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 40px;
+
+                p{
+                    color: #FFF;
+
+                    font-family: Pretendard;
+                    font-size: 1rem;
+                    font-weight: 500;
+                }
+                .antenna_items01{
+                    width: 110px;
+                    height: auto;
+                }
+
+                .antenna_items02{
+                    width: 186px;
+                    height: auto;
+                }
+            }
+        }
+
+        .arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 0;
+
+
+            svg{
+                height: 32px;
+
+            }
+        }
+
+        .container {
+            width: 290px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            border-radius: 12px;
+            background: #114755;
+            gap: 40px;
+            margin: 0 auto;
+            h4{
+                color: #FFF;
+                text-align: center;
+                font-family: Pretendard;
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+    
+            .list-model{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                width: 100%;
+                li{
+                    background-color: #06DDCE;
+                    width: 100%;
+                    color: #000;
+                    text-align: center;
+                    padding: 14px 24px;
+                    font-size: 1.25rem;
+                    box-sizing: border-box;
+                    border-radius: 12px;
+                    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05), 2px 2px 4px 0px rgba(255, 255, 255, 0.50) inset, -2px -2px 4px 0px rgba(0, 0, 0, 0.10) inset;
+                }
+            }
+        }
+
+
+    
+        .legend_wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 50px;
+            gap: 30px;
+            p{
+                font-size:1.05rem;
+                font-weight: 500;
+                color: #FFF;
+    
+                font-family: Pretendard;
+            }
+            .legend_list {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+    
+                .legend_items{
+                    border-radius: 8px;
+                    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05), 2px 2px 4px 0px rgba(255, 255, 255, 0.50) inset, -2px -2px 4px 0px rgba(0, 0, 0, 0.10) inset;
+                    padding: 14px 24px;
+                    
+                }
+            }
+        }
+
+        .arrow__wrapper{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        
+            .arrow__inner{
+                width: 50%;
+
+                .container{
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+
+    .content__right {
+        column-count: 2;
+        column-gap: 24px;
+        width: 66%;
+    
+        .list-section {
+            cursor: move;
+            height: fit-content; /* 컨텐츠 크기에 맞게 높이 설정 */
+            break-inside: avoid;
+            page-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            margin-bottom: 14px;
+            cursor: move;
+            &.dragging {
+                opacity: 0.5;
+                border: 2px dashed #4a90e2;
+            }
+    
+            h2 {
+                color: #ffffff;
+                font-size: 1.2rem;
+                padding: 10px 18px;
+                box-sizing: border-box;
+                border-radius: 12px 12px 0px 0px;
+                background: #063947;
+                margin: 0; /* 기본 마진 제거 */
+            }
+    
+            .content_inner {
+                border-radius: 0px 0px 12px 12px;
+                background: #114755;
+                padding: 16px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+    
+                .row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    min-height: 34px; /* 최소 높이 설정 */
+    
+                    .label {
+                        color: #FFF;
+                        flex: 1;
+                    }
+    
+                    .value {
+                        height: 34px;
+                        display: flex; /* 추가 */
+                        align-items: center; /* 추가 */
+                        justify-content: center; /* 추가 */
+                        border-radius: 8px;
+                        border: none;
+                        text-align: center;
+                        background: #267A86;
+                        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05),
+                                  1px 1px 4px 0px #006675 inset,
+                                  -2px -2px 4px 0px rgba(0, 0, 0, 0.10) inset;
+                        padding: 0 24px; /* 상하 패딩 제거 */
+                        width: 300px;
+                    }
+                }
+            }
+        }
+    
+        .drag-over {
+            border: 2px dashed #4a90e2;
+            opacity: 0.7;
+        }
+    }
+}
+
+.content.info-content  .content__right{
+    column-count: 1;
+}
+.tab-container {
+    width: 100%;
+    break-inside: avoid; // 컬럼 나누기 방지
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    display: block; // 블록 레벨 요소로 설정
+    height: 100%;
+    .tab-header {
+        
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .tab-item {
+            padding: 15px 38px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: #2D7082;
+            border-radius: 24px 24px 0px 0px;
+            font-size: 1rem;
+            font-weight: 500;
+            &.active {
+                background-color: #063947;
+            }
+            
+            &:hover {
+                background-color: #004854;
+            }
+        }
+    }
+    
+    .tab-content {
+        background-color: #063947;
+        min-height: 500px;
+        border-radius: 0 0 8px 8px;
+        height: calc(100% - 46px);
+        .tab-pane {
+            display: none;
+            padding: 20px;
+            color: #fff;
+            
+            &.active {
+                display: block;
+            }
+        }
+    }
+}
+
+.login-popup-body{
+    p{
+        color: #000;
+    font-family: Pretendard;
+    font-size: 1.2rem;
+    font-weight: 500;
+    }
+}
