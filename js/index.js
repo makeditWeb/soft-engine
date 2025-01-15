@@ -31,6 +31,34 @@ window.addEventListener('click', () => {
 
 // dashboard 컬러
 // status.js
+// content__right 전환을 위한 스타일 추가
+const style = document.createElement('style');
+style.textContent = `
+    .content__right_wrapper .content__right {
+        display: none;
+    }
+    .content__right_wrapper .content__right.active {
+        display: block;
+    }
+
+    .content-tap .arrow__inner.active .container{
+        border:2px solid #06DDCE;
+    }
+
+    .content-tap .arrow__inner {
+        cursor: pointer;
+    }
+    .content-tap .arrow__inner.active {
+        opacity: 1;
+    }
+
+
+    .content-tap .arrow__inner:not(.active) {
+        border:none;
+    }
+`;
+document.head.appendChild(style);
+
 const STATUS_COLORS = {
     'normal': '#06DDCE',    // sky-green (정상)
     'warning': '#FFBE19',   // yellow (비정상)
@@ -45,12 +73,44 @@ class StatusIndicator {
             const containerElement = document.getElementById(container);
             this.arrows = containerElement.querySelectorAll('.arrow svg path');
             this.listItems = containerElement.querySelectorAll('.list-model li');
+
+            containerElement.addEventListener('click', () => {
+                this.handleIndicatorClick();
+            });
         } else {
             // dashboard.html용 (전체 문서에서 요소 선택)
             this.arrows = document.querySelectorAll('.arrow svg path');
             this.listItems = document.querySelectorAll('.list-model li');
         }
         this.currentStatus = 'normal';
+        this.container = container;
+    }
+
+    handleIndicatorClick() {
+        if (!this.container) return;
+        
+        // 모든 indicator의 active 클래스 제거
+        document.querySelectorAll('.arrow__inner').forEach(el => {
+            el.classList.remove('active');
+        });
+        
+        // 클릭된 indicator에 active 클래스 추가
+        document.getElementById(this.container).classList.add('active');
+        
+        // content__right 전환
+        const indicatorNumber = this.container.replace('indicator', '');
+        const allContents = document.querySelectorAll('.content__right');
+        
+        // 모든 content 숨기기
+        allContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // 해당하는 content 보이기
+        const targetContent = document.querySelector(`.content__right[data-indicator="${indicatorNumber}"]`);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
     }
 
     changeStatus(status) {
@@ -61,12 +121,10 @@ class StatusIndicator {
 
         const color = STATUS_COLORS[status];
         
-        // SVG 색상 변경
         this.arrows.forEach(arrow => {
             arrow.setAttribute('fill', color);
         });
 
-        // 리스트 아이템 배경색 변경
         this.listItems.forEach(item => {
             item.style.backgroundColor = color;
         });
@@ -81,16 +139,17 @@ class StatusIndicator {
 
 // 페이지 초기화 함수
 function initializePage() {
-    // 현재 페이지 URL에서 페이지 타입 확인
     const currentPath = window.location.pathname;
     
     if (currentPath.includes('dashboard')) {
-        // dashboard.html 초기화
         initializeDashboard();
     } else if (currentPath.includes('antenna')) {
-        // antenna.html 초기화
         initializeAntenna();
     }
+
+    // 공통 기능 초기화
+    initializeDragAndDrop();
+    initializeInputFields();
 }
 
 // dashboard.html 초기화 함수
@@ -98,7 +157,6 @@ function initializeDashboard() {
     const statusIndicator = new StatusIndicator();
     
     function checkStatus() {
-        // 여기서 상태 확인 및 변경
         const status = 'normal'; 
         statusIndicator.changeStatus(status);
     }
@@ -111,9 +169,12 @@ function initializeDashboard() {
 function initializeAntenna() {
     const indicator1 = new StatusIndicator('indicator1');
     const indicator2 = new StatusIndicator('indicator2');
+
+    // 초기 상태 설정
+    document.getElementById('indicator1').classList.add('active');
+    document.querySelector('.content__right[data-indicator="1"]').classList.add('active');
     
     function checkStatus() {
-        // 각 인디케이터의 상태 확인 및 변경
         indicator1.changeStatus('normal');
         indicator2.changeStatus('normal');
     }
@@ -122,119 +183,16 @@ function initializeAntenna() {
     setInterval(checkStatus, 30000);
 }
 
-// DOM 로드 시 초기화
-document.addEventListener('DOMContentLoaded', initializePage);
-
-
-// drag & drap
-
-document.addEventListener('DOMContentLoaded', () => {
-    // 드래그 앤 드롭 기능
-    const container = document.querySelector('.content__right');
+// 드래그 앤 드롭 초기화
+function initializeDragAndDrop() {
     const sections = document.querySelectorAll('.list-section');
-
     sections.forEach(section => {
         section.addEventListener('dragstart', handleDragStart);
         section.addEventListener('dragend', handleDragEnd);
         section.addEventListener('dragover', handleDragOver);
         section.addEventListener('drop', handleDrop);
     });
-
-    function handleDragStart(e) {
-        this.classList.add('dragging');
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', this.id);
-    }
-
-    function handleDragEnd(e) {
-        this.classList.remove('dragging');
-        sections.forEach(section => {
-            section.classList.remove('drag-over');
-        });
-    }
-
-    function handleDragOver(e) {
-        if (e.preventDefault) {
-            e.preventDefault();
-        }
-        this.classList.add('drag-over');
-        return false;
-    }
-
-    function handleDrop(e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        const draggingElement = document.querySelector('.dragging');
-        const dropTarget = this;
-
-        if (draggingElement !== dropTarget) {
-            // Get all sections as array for index calculation
-            const allSections = [...container.querySelectorAll('.list-section')];
-            const draggingIndex = allSections.indexOf(draggingElement);
-            const dropIndex = allSections.indexOf(dropTarget);
-
-            // Determine new position
-            if (draggingIndex < dropIndex) {
-                dropTarget.parentNode.insertBefore(draggingElement, dropTarget.nextSibling);
-            } else {
-                dropTarget.parentNode.insertBefore(draggingElement, dropTarget);
-            }
-        }
-
-        // Remove drag-over styling
-        this.classList.remove('drag-over');
-        return false;
-    }
-
-    // 입력 필드 관리 기능
-    const inputs = document.querySelectorAll('.content__right input.value');
-    
-    inputs.forEach(input => {
-        // 초기 상태를 읽기 전용으로 설정
-        input.readOnly = true;
-        
-        // 더블클릭 이벤트 리스너 추가
-        input.addEventListener('dblclick', function() {
-            this.readOnly = false;
-            this.focus();
-            const len = this.value.length;
-            this.setSelectionRange(len, len);
-        });
-
-        // blur(포커스 아웃) 이벤트 리스너 추가
-        input.addEventListener('blur', function() {
-            this.readOnly = true;
-            handleValueChange(this);
-        });
-
-        // 엔터 키 이벤트 리스너 추가
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                this.blur();
-            }
-        });
-    });
-});
-
-// 값 변경 처리 함수
-// script.js
-
-document.addEventListener('DOMContentLoaded', () => {
-    // 드래그 앤 드롭 기능
-    const container = document.querySelector('.content__right');
-    const sections = document.querySelectorAll('.list-section');
-
-    sections.forEach(section => {
-        section.addEventListener('dragstart', handleDragStart);
-        section.addEventListener('dragend', handleDragEnd);
-        section.addEventListener('dragover', handleDragOver);
-        section.addEventListener('drop', handleDrop);
-    });
-
-    // 입력 필드 초기화
-    initializeInputFields();
-});
+}
 
 // 드래그 앤 드롭 관련 함수들
 function handleDragStart(e) {
@@ -266,7 +224,7 @@ function handleDrop(e) {
     const dropTarget = this;
 
     if (draggingElement !== dropTarget) {
-        const container = document.querySelector('.content__right');
+        const container = dropTarget.closest('.content__right');
         const allSections = [...container.querySelectorAll('.list-section')];
         const draggingIndex = allSections.indexOf(draggingElement);
         const dropIndex = allSections.indexOf(dropTarget);
@@ -282,16 +240,15 @@ function handleDrop(e) {
     return false;
 }
 
-// 입력 필드 초기화 함수
+// 입력 필드 초기화
 function initializeInputFields() {
     const inputs = document.querySelectorAll('.content__right input.value');
-    
     inputs.forEach(input => {
         setupInputField(input);
     });
 }
 
-// 입력 필드 설정 함수
+// 입력 필드 설정
 function setupInputField(input) {
     input.readOnly = true;
     
@@ -314,7 +271,7 @@ function setupInputField(input) {
     });
 }
 
-// 값 변경 처리 함수
+// 값 변경 처리
 function handleValueChange(input) {
     const row = input.closest('.row');
     const label = row.querySelector('.label').textContent;
@@ -324,15 +281,11 @@ function handleValueChange(input) {
     console.log(`Section: ${section}, Field: ${label}, New Value: ${newValue}`);
 }
 
-// 특정 label 다음에 새로운 row 추가 함수
+// Row 관리 함수들
 function addRowAfterLabel(sectionClass, targetLabel, newLabel, newValue = '') {
     const section = document.querySelector(`.list-section.${sectionClass} .content_inner`);
-    if (!section) {
-        console.error(`Section ${sectionClass} not found`);
-        return false;
-    }
+    if (!section) return false;
 
-    // 타겟 label을 찾음
     const rows = section.querySelectorAll('.row');
     let targetRow = null;
     
@@ -344,46 +297,33 @@ function addRowAfterLabel(sectionClass, targetLabel, newLabel, newValue = '') {
         }
     }
 
-    if (!targetRow) {
-        console.error(`Target label "${targetLabel}" not found in section ${sectionClass}`);
-        return false;
-    }
+    if (!targetRow) return false;
 
-    // 새로운 row 생성
     const newRow = document.createElement('div');
     newRow.className = 'row';
 
-    // label div 생성
     const label = document.createElement('div');
     label.className = 'label';
     label.textContent = newLabel;
 
-    // input 생성
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'value';
     input.value = newValue;
     
-    // 입력 필드 설정
     setupInputField(input);
 
-    // row에 요소들 추가
     newRow.appendChild(label);
     newRow.appendChild(input);
-
-    // 타겟 row 다음에 새로운 row 삽입
     targetRow.insertAdjacentElement('afterend', newRow);
 
     return true;
 }
 
-// value 값 업데이트 함수
+// value 업데이트 함수들
 function updateInputValue(sectionClass, labelText, newValue) {
     const section = document.querySelector(`.list-section.${sectionClass}`);
-    if (!section) {
-        console.error(`Section ${sectionClass} not found`);
-        return false;
-    }
+    if (!section) return false;
 
     const rows = section.querySelectorAll('.row');
     for (const row of rows) {
@@ -398,46 +338,24 @@ function updateInputValue(sectionClass, labelText, newValue) {
         }
     }
 
-    console.error(`Label "${labelText}" not found in section ${sectionClass}`);
     return false;
 }
 
-// 여러 row 한번에 추가
 function addMultipleRowsAfterLabel(sectionClass, targetLabel, newRows) {
     return newRows.every((row, index) => {
-        // 첫 번째 항목은 targetLabel 다음에, 나머지는 이전에 추가된 항목 다음에 추가
         const target = index === 0 ? targetLabel : newRows[index - 1].label;
         return addRowAfterLabel(sectionClass, target, row.label, row.value);
     });
 }
 
-// 여러 value 한번에 업데이트
 function updateMultipleValues(sectionClass, updates) {
     return updates.every(update => 
         updateInputValue(sectionClass, update.label, update.value)
     );
 }
 
-// 예시 1: 단일 row 추가
-// GNSS 섹션의 '최근 ZDA 시간' 다음에 새로운 필드 추가
-// addRowAfterLabel('gnss', '최근 ZDA 시간', '새로운필드', '초기값');
-
-// 예시 2: 여러 row 한번에 추가
-// const newGnssRows = [
-//     { label: '수신감도', value: '-75dBm' },
-//     { label: '위성상태', value: '정상' },
-//     { label: '업데이트주기', value: '1초' }
-// ];
-
-// addMultipleRowsAfterLabel('gnss', '최근 ZDA 시간', newGnssRows);
-
-// 예시 3: 추가된 필드의 value만 업데이트
-// updateInputValue('gnss', '수신감도', '-80dBm');
-
-// '받아낸 위성수량(GLO)' 다음에 추가하고 싶을 경우
-// addRowAfterLabel('gnss', '받아낸 위성수량(GLO)', '새로운필드', '초기값');
-
-
+// DOM 로드 시 초기화
+document.addEventListener('DOMContentLoaded', initializePage);
 
 
 

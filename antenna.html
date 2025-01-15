@@ -133,7 +133,7 @@
         </div>
 
         <div class="content">
-            <div class="content__left">
+            <div class="content__left content-tap">
                 <div class="antenna__header">
                     <div class="antnenna__list">
                         <img src="./image/satellite01.png" class="antenna_items01">
@@ -269,119 +269,247 @@
                 </div>
 
             </div>
-            <div class="content__right">
-                <div class="list-section system" draggable="true">
-                    <h2>시스템</h2>
-                    <div class="content_inner">
-                        <div class="row">
-                            <div class="label">운영모드</div>
-                            <input type="text" class="value" value="정상">
-                        </div>
-                        <div class="row">
-                            <div class="label">운영SW</div>
-                            <input type="text" class="value" value="main">
-                        </div>
-                        <div class="row">
-                            <div class="label">시스템시간</div>
-                            <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초">
-                        </div>
-                        <div class="row">
-                            <div class="label">가용메모리</div>
-                            <input type="text" class="value" value="90MB">
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="list-section status" draggable="true">
-                    <h2>모뎀</h2>
-                    <div class="content_inner">
-                        <div class="row">
-                            <div class="label">운영모드</div>
-                            <input type="text" class="value" value="ONLINE">
-                        </div>
-                        <div class="row">
-                            <div class="label">획득상태</div>
-                            <input type="text" class="value" value="No Cell">
-                        </div>
-                        <div class="row">
-                            <div class="label">MGT 연결</div>
-                            <input type="text" class="value" value="미연결">
-                        </div>
-                        <div class="row">
-                            <div class="label">WAN 연결</div>
-                            <input type="text" class="value" value="미연결">
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="list-section gnss" draggable="true">
-                    <h2>GNSS</h2>
-                    <div class="content_inner">
-                        <div class="row">
-                            <div class="label">GNSS 고정 타입</div>
-                            <input type="text" class="value" value="3D"></input>
-                        </div>
-                        <div class="row">
-                            <div class="label">GNSS 고정 품질</div>
-                            <input type="text" class="value" value="GPS 고정(SPS)"></input>
-                        </div>
-                        <div class="row">
-                            <div class="label">최종 고정 시간</div>
-                            <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초"></input>
-                        </div>
-                        <div class="row">
-                            <div class="label">받아낸 위성수량(GPS)</div>
-                            <input type="text" class="value" value="12"></input>
-                        </div>
-                        <div class="row">
-                            <div class="label">받아낸 위성수량(GLO)</div>
-                            <input type="text" class="value" value="1"></input>
-                        </div>
-                        <div class="row">
-                            <div class="label">최근 ZDA 시간</div>
-                            <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초"></input>
-                        </div>
-                    </div>
-                </div>
+            <div class="content__right_wrapper">
+                <div class="content__right active" data-indicator="1">
 
-                <div class="list-section antenna" draggable="true">
-                    <h2>안테나</h2>
-                    <div class="content_inner">
-                        <div class="row">
-                            <div class="label">모델</div>
-                            <input type="text" class="value" value="OW70L-Dac"></input>
+                    <h2>위성단말 #1</h2>
+                    <div class="content__right__list">
+                        <div class="list-section system" draggable="true">
+                            <h2>시스템</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">운영모드</div>
+                                    <input type="text" class="value" value="정상">
+                                </div>
+                                <div class="row">
+                                    <div class="label">운영SW</div>
+                                    <input type="text" class="value" value="main">
+                                </div>
+                                <div class="row">
+                                    <div class="label">시스템시간</div>
+                                    <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초">
+                                </div>
+                                <div class="row">
+                                    <div class="label">가용메모리</div>
+                                    <input type="text" class="value" value="90MB">
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="label">상태</div>
-                            <input type="text" class="value" value="양호"></input>
+                
+                        <div class="list-section status" draggable="true">
+                            <h2>모뎀</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">운영모드</div>
+                                    <input type="text" class="value" value="ONLINE">
+                                </div>
+                                <div class="row">
+                                    <div class="label">획득상태</div>
+                                    <input type="text" class="value" value="No Cell">
+                                </div>
+                                <div class="row">
+                                    <div class="label">MGT 연결</div>
+                                    <input type="text" class="value" value="미연결">
+                                </div>
+                                <div class="row">
+                                    <div class="label">WAN 연결</div>
+                                    <input type="text" class="value" value="미연결">
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="label">시리얼 번호</div>
-                            <input type="text" class="value" value="미식별"></input>
+                
+                        <div class="list-section gnss" draggable="true">
+                            <h2>GNSS</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">GNSS 고정 타입</div>
+                                    <input type="text" class="value" value="3D"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">GNSS 고정 품질</div>
+                                    <input type="text" class="value" value="GPS 고정(SPS)"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">최종 고정 시간</div>
+                                    <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">받아낸 위성수량(GPS)</div>
+                                    <input type="text" class="value" value="12"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">받아낸 위성수량(GLO)</div>
+                                    <input type="text" class="value" value="1"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">최근 ZDA 시간</div>
+                                    <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초"></input>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="list-section antenna" draggable="true">
+                            <h2>안테나</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">모델</div>
+                                    <input type="text" class="value" value="OW70L-Dac"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">상태</div>
+                                    <input type="text" class="value" value="양호"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">시리얼 번호</div>
+                                    <input type="text" class="value" value="미식별"></input>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="list-section network" draggable="true">
+                            <h2>네트워크</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">IP 주소</div>
+                                    <input type="text" class="value" value="192.168.123.22"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">업로드 속도</div>
+                                    <input type="text" class="value" value="78MB"> </input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">다운로드 속도</div>
+                                    <input type="text" class="value" value="99MB"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">연결 단말 수량</div>
+                                    <input type="text" class="value" value="16"></input>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="list-section network" draggable="true">
-                    <h2>네트워크</h2>
-                    <div class="content_inner">
-                        <div class="row">
-                            <div class="label">IP 주소</div>
-                            <input type="text" class="value" value="192.168.123.22"></input>
+                </div>
+                <div class="content__right" data-indicator="2">
+
+                    <h2>위성단말 #2</h2>
+                    
+                    <div class="content__right__list">
+                        <div class="list-section system" draggable="true">
+                            <h2>시스템</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">운영모드</div>
+                                    <input type="text" class="value" value="정상">
+                                </div>
+                                <div class="row">
+                                    <div class="label">운영SW</div>
+                                    <input type="text" class="value" value="main">
+                                </div>
+                                <div class="row">
+                                    <div class="label">시스템시간</div>
+                                    <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초">
+                                </div>
+                                <div class="row">
+                                    <div class="label">가용메모리</div>
+                                    <input type="text" class="value" value="90MB">
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="label">업로드 속도</div>
-                            <input type="text" class="value" value="78MB"> </input>
+                
+                        <div class="list-section status" draggable="true">
+                            <h2>모뎀</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">운영모드</div>
+                                    <input type="text" class="value" value="ONLINE">
+                                </div>
+                                <div class="row">
+                                    <div class="label">획득상태</div>
+                                    <input type="text" class="value" value="No Cell">
+                                </div>
+                                <div class="row">
+                                    <div class="label">MGT 연결</div>
+                                    <input type="text" class="value" value="미연결">
+                                </div>
+                                <div class="row">
+                                    <div class="label">WAN 연결</div>
+                                    <input type="text" class="value" value="미연결">
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="label">다운로드 속도</div>
-                            <input type="text" class="value" value="99MB"></input>
+                
+                        <div class="list-section gnss" draggable="true">
+                            <h2>GNSS</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">GNSS 고정 타입</div>
+                                    <input type="text" class="value" value="3D"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">GNSS 고정 품질</div>
+                                    <input type="text" class="value" value="GPS 고정(SPS)"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">최종 고정 시간</div>
+                                    <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">받아낸 위성수량(GPS)</div>
+                                    <input type="text" class="value" value="12"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">받아낸 위성수량(GLO)</div>
+                                    <input type="text" class="value" value="1"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">최근 ZDA 시간</div>
+                                    <input type="text" class="value" value="2024년 8월 9일 14시 32분 56초"></input>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="label">연결 단말 수량</div>
-                            <input type="text" class="value" value="16"></input>
+        
+                        <div class="list-section antenna" draggable="true">
+                            <h2>안테나</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">모델</div>
+                                    <input type="text" class="value" value="OW70L-Dac"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">상태</div>
+                                    <input type="text" class="value" value="양호"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">시리얼 번호</div>
+                                    <input type="text" class="value" value="미식별"></input>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="list-section network" draggable="true">
+                            <h2>네트워크</h2>
+                            <div class="content_inner">
+                                <div class="row">
+                                    <div class="label">IP 주소</div>
+                                    <input type="text" class="value" value="192.168.123.22"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">업로드 속도</div>
+                                    <input type="text" class="value" value="78MB"> </input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">다운로드 속도</div>
+                                    <input type="text" class="value" value="99MB"></input>
+                                </div>
+                                <div class="row">
+                                    <div class="label">연결 단말 수량</div>
+                                    <input type="text" class="value" value="16"></input>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
